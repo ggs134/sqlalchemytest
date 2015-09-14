@@ -11,8 +11,6 @@ from sqlalchemy.orm import relationship, backref
 
 Base=declarative_base()
 
-
-    
 class Address(Base):
     
     __tablename__='addresses' #name of table
@@ -23,7 +21,7 @@ class Address(Base):
     user_id = Column(Integer, ForeignKey('users.index'))
     
     #make a relationship between this class and class 'User'
-    user = relationship("User", backref('addresses'))
+    user = relationship("User", backref="addresses")
     
     #This is instructor
     def __init__(self, email_address):
@@ -47,7 +45,7 @@ class User(Base):
         self.password = password
 
     def __repr__(self):
-        return "<User('%s','%s','%s')>"&(self.name, self.fullname, self.password)
+        return "<User('%s','%s','%s')>"%(self.name, self.fullname, self.password)
 
 engine=create_engine("mysql://root:wjdtnsgud1!@localhost/sqlalchemytest", encoding='utf8', echo=True)
 Base.metadata.create_all(engine)
